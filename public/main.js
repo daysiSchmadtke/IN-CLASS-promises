@@ -19,7 +19,13 @@ const htmlStructure = () => {
 
 const events = () => {
   document.querySelector('#get-joke').addEventListener('click', () => {
-    getRequest().then(console.warn);
+    getRequest().then((data) => {
+      if (data.type === 'single') {
+        document.querySelector('#display').innerHTML = data.joke;
+      } else if (data.type === 'twopart') {
+        document.querySelector('#display').innerHTML = `${data.setup} <br> ${data.delivery}`;
+      }
+    });
   });
   document.querySelector('#post-name').addEventListener('click', () => {
     // update this object with your name
